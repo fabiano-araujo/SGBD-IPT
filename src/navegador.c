@@ -21,7 +21,12 @@ int main(){
 			case 0:
 				break;
 			case 1:
-				criarTabela();
+				char nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				criarTabela(nome);
 				break;
 
 			case 2:
@@ -29,7 +34,12 @@ int main(){
 				break;
 
 			case 3:
-				criarLinha();
+				char nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				criarLinha(nome);
 				break;
 
 			case 4:
@@ -41,11 +51,21 @@ int main(){
 				break;
 
 			case 6:
-				apagarValor();
+				char nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				apagarValor(nome);
 				break;
 
 			case 7:
-				apagarTabela();
+				char nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				apagarTabela(nome);
 				break;
 
 			default:
