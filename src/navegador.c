@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include "database.h"
-int main(){	
+
+int main(){
+
 	int opcao;
+	
 	do{
 		printf("%s\n","Digite 1 para criar uma tabela:");
 		printf("%s\n","Digite 2 para listar todas as tabelas:");
@@ -18,31 +21,31 @@ int main(){
 			case 0:
 				break;
 			case 1:
-
+				criarTabela();
 				break;
 
 			case 2:
-
+				listarTabelas();
 				break;
 
 			case 3:
-
+				criarLinha();
 				break;
 
 			case 4:
-
+				listarTodosDados();
 				break;
 
 			case 5:
-
+				pesquisarValor();
 				break;
 
 			case 6:
-
+				apagarValor();
 				break;
 
 			case 7:
-
+				apagarTabela();
 				break;
 
 			default:
