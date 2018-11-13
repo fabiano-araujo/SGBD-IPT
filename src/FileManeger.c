@@ -1,18 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "FileManeger.h"
 
-int criarTabela(char* name)
+int criarTabela(char* tabela)
+{
+	
+}
+int criarLinha(char* tabela)
 {
 
 }
-int criarLinha(char* name)
+int apagarValor(char* tabela)
 {
 
 }
-int apagarValor(char* name)
-{
-
-}
-int apagarTabela(char* name)
+int apagarTabela(char* tabela)
 {
 
 }

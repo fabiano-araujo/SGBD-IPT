@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stype.h>
+#include "database.h"
 
 int listarTabelas()
 {

@@ -1,13 +1,9 @@
 #include <stdio.h>
-int create(char* name, char* txt){
 
-}
-int read(char* name){
+int criarTabela(char* tabela);
 
-}
-int update(char* name, char* txt){
+int criarLinha(char* tabela);
 
-}
-int delete(char* name){
+int apagarValor(char* tabela);
 
-}
+int apagarTabela(char* tabela);
