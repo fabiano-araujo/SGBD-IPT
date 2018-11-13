@@ -24,10 +24,17 @@
 
 
 @ inicio de uma tabela
+
 : finalização do nome da tabela, logo apos ficará a quantidade de colunas
+
 ! finalização do nome da coluna, logo apos ficará seu tipo
+
 - separação entre os nomes das colunas
+
 () indicará o incio e o fim do conteudo da tabela
+
 . separação das linhas
+
 , separação de cada elemento da linha
+
 ; finalização da tabela
