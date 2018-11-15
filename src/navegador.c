@@ -15,6 +15,7 @@ int main(){
 		printf("%s\n","Digite 6 para apagar valor de uma tabela:");
 		printf("%s\n","Digite 7 para apagar uma tabela:");
 		
+		
 		scanf("%d",&opcao);
 
 		switch(opcao)
