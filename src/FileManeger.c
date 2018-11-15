@@ -237,8 +237,16 @@ int criarTabela(char* tabela)
 }
 
 
+
+//======================================CRIAR LINHA=====================================//
 int criarLinha(char* tabela)
 {
+	FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
+
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+
+	fscanf()
 
 }
 int apagarValor(char* tabela)
