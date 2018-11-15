@@ -5,7 +5,7 @@
 int main(){
 
 	int opcao;
-	
+	char nome[40];
 	do{
 		printf("%s\n","Digite 1 para criar uma tabela:");
 		printf("%s\n","Digite 2 para listar todas as tabelas:");
@@ -15,7 +15,6 @@ int main(){
 		printf("%s\n","Digite 6 para apagar valor de uma tabela:");
 		printf("%s\n","Digite 7 para apagar uma tabela:");
 		
-		
 		scanf("%d",&opcao);
 
 		switch(opcao)
@@ -23,7 +22,7 @@ int main(){
 			case 0:
 				break;
 			case 1:
-				char nome[40];
+				nome[40];
 
 				printf("Nome da tabela: ");
 				scanf("%s", &nome);
@@ -36,7 +35,7 @@ int main(){
 				break;
 
 			case 3:
-				char nome[40];
+				nome[40];
 
 				printf("Nome da tabela: ");
 				scanf("%s", &nome);
@@ -53,7 +52,7 @@ int main(){
 				break;
 
 			case 6:
-				char nome[40];
+				nome[40];
 
 				printf("Nome da tabela: ");
 				scanf("%s", &nome);
@@ -62,7 +61,7 @@ int main(){
 				break;
 
 			case 7:
-				char nome[40];
+				nome[40];
 
 				printf("Nome da tabela: ");
 				scanf("%s", &nome);
