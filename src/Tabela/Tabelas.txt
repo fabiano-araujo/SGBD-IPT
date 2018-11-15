@@ -17,3 +17,13 @@
 @aelxandre:2:KeyPrimary!1-2!1-asdasd!1-
 @alexnare:2:KeyPrimary!1-nome!5-idade!5-
 @alexandre:3:KeyPrimary!1-nome!5-idade!2-altura!3-
+@alexnadre:2:KeyPrimary!1-nome!5-idade!2-
+@alexa:2:KeyPrimary!1-agdfg!1-asgdsfg!1-(
+@alexnadre:2:KeyPrimary!1-asd!1-asdf!1-(
+@Pessoas:2:KeyPrimary!1-nome!5-idade!2-(Alenxandre,19,nada,00,
+@Pessoas:2:KeyPrimary!1-Nome!5-idade!2-(Alexadre,20.aline,15.
+@Alenxadre:2:KeyPrimary!1-Nome!5-Idade!2-(Alexandre,20.Aline,15.Luzinete,50)
+@Pessoas:2:PrimaryKey!1-Nome!5-idade!2-(0,Alexandre,20.1,Aline,15)
+@Pessoa:3:cpf!2-Nome!5-idade!2-dasd!2-(0,alenxadre,20,adsf.1,asdf,23,fgd);
+@P:3:CPF!2-nome!5-idade!2-(0,123123,Alenxadre,20.1,1342,Aline,15);
+@Pessoas:3:CPF!2-Nome!5-idade!2-(12341,Alexandre,20.13424,Aline,15.54134,Luzinete,50);

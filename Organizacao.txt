@@ -1,8 +1,8 @@
-0 char
-1 int
-2 float
-3 double
-4 string
+1 char
+2 int
+3 float
+4 double
+5 string
 
 @NomeTabela:quantidade de colunas:coluna1!4-coluna2!1-coluna3!0-(dado1,dado2,dado3.dado1,dado2,dado3);
 @NomeTabela:quantidade de colunas:coluna1!4-coluna2!1-coluna3!0-(dado1,dado2,dado3.dado1,dado2,dado3);

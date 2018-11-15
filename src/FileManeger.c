@@ -5,18 +5,20 @@
 #include <ctype.h>
 
 
-
 int criarTabela(char* tabela)
 {
 	char nomeTabela[42] = "@";
 	char quantidadeColunas[10];
 	char nomeDaColuna[40];
 	char tipoDaColuna[10];
+	char* nomeDoTipo[10];
 	int contador=0;
 	int resposta;
 	int numeroDeColunas;
 	int tipo;
 	char tipoStr[20];
+	char valor[200];
+	int i, j;
 
 	FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
 	fseek(arquivo, 0, SEEK_END);
@@ -48,19 +50,23 @@ int criarTabela(char* tabela)
 	{	
 		//Chave primaria automatica
 		//Obtendo nome e tipo da coluna
-		fprintf(arquivo, "KeyPrimary!1-");
+		fprintf(arquivo, "PrimaryKey!2-");
 		while(contador<numeroDeColunas){
 			char formatando[45] = "";
 			tipo = 6;
+
 			printf("Nome da coluna %d: ", contador+1);
 			scanf("%s", &nomeDaColuna);
-			*(colunas+contador)->nome = nomeDaColuna;
-			printf("Passou em\n");
+			strcpy(colunas[contador].nome, nomeDaColuna);
+
+			//printf("Passou em\n");
 			strcat(formatando, nomeDaColuna);
+
 			strcat(formatando, "!");
 			
-			printf("%s\n", (colunas+contador)->nome);
-			printf("passou tbm\n");
+			//printf("%s\n", colunas[contador].nome);
+
+			//printf("passou tbm\n");
 			while(tipo < 1 || tipo > 5){
 				printf("Tipo da coluna(Digitar 1 - char, 2 - int, 3 - float, 4 - double, 5 - string):");
 				scanf("%d", &tipo);
@@ -72,6 +78,7 @@ int criarTabela(char* tabela)
 					printf("Valor invalido\n");
 				}
 			}
+			colunas[contador].tipo = tipo;
 			itoa(tipo, tipoStr, 10);//funcao nova
 
 			strcat(formatando, tipoStr);
@@ -79,24 +86,157 @@ int criarTabela(char* tabela)
 
 			fprintf(arquivo, "%s", formatando);
 			printf("Armazenado %d\n", contador);
-			fflush(stdout);
-			fflush(stdin);
+			//fflush(stdout);
+			//fflush(stdin);
 			contador++;
 		}
+	fprintf(arquivo, "(");
+
+	printf("Quantidade de Linhas: ");
+	scanf("%d", &resposta);
+
+	for (i = 0; i < resposta; i++)
+	{
+		char chavePrimaria[10] = "";
+		itoa(i, chavePrimaria, 10);
+		strcat(chavePrimaria, ",");
+		fprintf(arquivo, "%s", chavePrimaria);
+		printf("Linha %d\n", i+1);
+
+		for (j = 0; j < numeroDeColunas; j++)
+		{
+
+			printf("%d = %s: ", j, colunas[j].nome);
+			scanf("%s", &valor);
+			if (j == numeroDeColunas-1)
+			{
+				if (i == resposta-1)
+				{
+					strcat(valor, ")");
+				}else{
+					strcat(valor, ".");
+				}
+			}
+			else{
+				strcat(valor, ",");
+			}
+			fprintf(arquivo, "%s", valor);
+			setbuf(stdin, NULL);
+		}
+	}
+
 
 	}
+
+
+
 	else{
+		char formatandoPK[] = "";
+		printf("ATENCAO: a chave primaria precisa ser a primeira coluna!\nsendo Obrigatoriamente do tipo INT\n");
+		printf("nome da Coluna que sera a chave primaria: ");
+		scanf("%s", &nomeDaColuna);
+		strcpy(colunas[contador].nome, nomeDaColuna);
+		colunas[contador].tipo = 2;
+		strcpy(formatandoPK, nomeDaColuna);
+		strcat(formatandoPK, "!2-");
+
+		fprintf(arquivo, "%s", formatandoPK);
+
+
+		//repetido
+		contador++;
+		while(contador<numeroDeColunas){
+			char formatando[45] = "";
+			tipo = 6;
+
+			printf("Nome da coluna %d: ", contador+1);
+			scanf("%s", &nomeDaColuna);
+			strcpy(colunas[contador].nome, nomeDaColuna);
+
+			//printf("Passou em\n");
+			strcat(formatando, nomeDaColuna);
+
+			strcat(formatando, "!");
+			
+			//printf("%s\n", colunas[contador].nome);
+
+			//printf("passou tbm\n");
+			while(tipo < 1 || tipo > 5){
+				printf("Tipo da coluna(Digitar 1 - char, 2 - int, 3 - float, 4 - double, 5 - string):");
+				scanf("%d", &tipo);
+				if (tipo == 1 || tipo == 2 || tipo == 3 || tipo == 4 || tipo == 5)
+				{
+					printf("pronto\n");
+				}
+				else{
+					printf("Valor invalido\n");
+				}
+			}
+			colunas[contador].tipo = tipo;
+			itoa(tipo, tipoStr, 10);//funcao nova
+
+			strcat(formatando, tipoStr);
+			strcat(formatando, "-");
+
+			fprintf(arquivo, "%s", formatando);
+			printf("Armazenado %d\n", contador);
+			//fflush(stdout);
+			//fflush(stdin);
+			contador++;		
+		}
+	fprintf(arquivo, "(");
+
+	printf("Quantidade de Linhas: ");
+	scanf("%d", &resposta);
+
+	for (i = 0; i < resposta; i++)
+	{
+		printf("Linha %d\n", i+1);
+
+		for (j = 0; j < numeroDeColunas; j++)
+		{
+
+			printf("%d = %s: ", j, colunas[j].nome);
+			scanf("%s", &valor);
+			if (j == numeroDeColunas-1)
+			{
+				if (i == resposta-1)
+				{
+					strcat(valor, ")");
+				}else{
+					strcat(valor, ".");
+				}
+			}
+			else{
+				strcat(valor, ",");
+			}
+			fprintf(arquivo, "%s", valor);
+			setbuf(stdin, NULL);
+		}
+	}
 
 	}
 
 
+
+
+
+
+
+
+
+	//Receber os dados quando a chave primaria é automatica
+	
 	printf("%s\n", nomeTabela);
 	printf("%d\n", numeroDeColunas);
 
 	fflush(stdout);
+	fprintf(arquivo, ";");
 	fprintf(arquivo, "\n");
 	fclose(arquivo);
 }
+
+
 int criarLinha(char* tabela)
 {
 
@@ -116,38 +256,25 @@ int apagarTabela(char* tabela)
 
 
 
-int verificarTipo(int Tipo)
+
+
+
+
+
+
+
+
+
+
+
+
+char* verificarTipo(int Tipo)
 {
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//if (Tipo == 1)
+	//{
+		char* nomeDoTipo = "CHAR";
+		return nomeDoTipo;
+	//}
 
 
 	//----------------------Talvez vá pro lixo------------------------\\

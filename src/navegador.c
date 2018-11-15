@@ -70,6 +70,7 @@ int main(){
 				break;
 
 			default:
+				setbuf(stdin, NULL);
 				printf("Valor Invalido\n");
 		}	
 	}while(opcao != 0);
