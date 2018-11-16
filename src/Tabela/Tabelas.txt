@@ -29,3 +29,8 @@
 @adas:2:PrimaryKey!2-1!2-asd!2-(0,asds,wqe);
 @abcdefghijkl:1:PrimaryKey!2-asd!3-(;
 @asdjhfklashdfjhads:2:PrimaryKey!2-nmome!3-adas!2-(0,asdasd,asd);
+@ola:3:PrimaryKey!2-Nome!5-idade!2-alura!3-(0,Alexandre,20,1.74.1,Aline,15,1.60);
+@Alasda:1:PrimaryKey!2-idade!2-(0,alexan);
+@asd:2:cpf!2-nome!5-(123123,alexandre.aline,123123);
+@fds:2:cpf!2-nome!5-(123,ads.123,asdfa);
+@tabela:2:cpf!2-nome!5-(123,alexnadre.124,aline.123,alexandre.124,asdf);
