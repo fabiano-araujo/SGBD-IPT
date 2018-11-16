@@ -10,9 +10,7 @@
 @aelxandre:2:KeyPrimary!1-nome!1-nome!1-idade!1-
 @aelxandre:2:KeyPrimary!1-)Ñtalexandreasd!0-)Ñtalexandreasd!0-asda!0-
 @aelxandre:2:KeyPrimary!1-alexma!1-alexma!1-alexnade!1-
-@aelxand:2:KeyPrimary!1-t 
-8alenxa!1-t 
-8alenxa!1-aledasd!1-
+@aelxand:2:KeyPrimary!1-t8alenxa!1-t 8alenxa!1-aledasd!1-
 @aelxandre:2:KeyPrimary!1-asd!1-dsa!1-
 @aelxandre:2:KeyPrimary!1-2!1-asdasd!1-
 @alexnare:2:KeyPrimary!1-nome!5-idade!5-
@@ -27,3 +25,7 @@
 @Pessoa:3:cpf!2-Nome!5-idade!2-dasd!2-(0,alenxadre,20,adsf.1,asdf,23,fgd);
 @P:3:CPF!2-nome!5-idade!2-(0,123123,Alenxadre,20.1,1342,Aline,15);
 @Pessoas:3:CPF!2-Nome!5-idade!2-(12341,Alexandre,20.13424,Aline,15.54134,Luzinete,50);
+@P:1:PrimaryKey!2-nome!5-(0,Alenxadre);
+@adas:2:PrimaryKey!2-1!2-asd!2-(0,asds,wqe);
+@abcdefghijkl:1:PrimaryKey!2-asd!3-(;
+@asdjhfklashdfjhads:2:PrimaryKey!2-nmome!3-adas!2-(0,asdasd,asd);

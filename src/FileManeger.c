@@ -239,15 +239,66 @@ int criarTabela(char* tabela)
 
 
 //======================================CRIAR LINHA=====================================//
+
+
 int criarLinha(char* tabela)
 {
 	FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
+	int contador = 0;
+	int comecar = 0;
+	int i;
+	char nomeTabela[42];
+	char *pch;
+
 
 	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
 	else printf("Tudo OK ao abrir arquivo\n");
 
-	fscanf()
+	//          COM FSCANF
+	//fscanf(arquivo, "@%s:", &nomeTabela);
+	//printf("%s\n", nomeTabela);
 
+    //          COM FGETC
+    
+	while((c = fgetc(arquivo)) != EOF){
+		//printf("%c", c);
+		if (comecar == 1)
+		{
+			//printf("%c", c);
+			//printf("Passou no while\n");
+			nomeTabela[contador] = c;
+			contador++;
+			if (c == ':')
+			{
+				comecar = 0;
+				contador = 0;
+				pch = strtok(nomeTabela, ":");
+				printf("%s == %s, %s\n", tabela, pch, nomeTabela);
+
+				if(strcmp(tabela, nomeTabela)==0){
+					printf("Pronto\n");
+					//printf("%s\n", nomeTabela);
+					//strcpy(nomeTabela, vetorVazio);
+					//memset(nomeTabela,'', 42);
+					//printf("%s\n", nomeTabela);
+
+
+
+					setbuf(stdout, NULL);
+					fflush(stdout);
+				}
+				//for (i = 0; i < tolenght(nomeTabela); i++)
+				//	{
+				//		nomeTabela[i] = ' ';
+				//	}
+			}
+		}
+		if (c == '@')
+		{
+			comecar = 1;	
+		}
+	}
+	
 }
 int apagarValor(char* tabela)
 {
@@ -325,3 +376,47 @@ char* verificarTipo(int Tipo)
 	}
 	*/
 }
+
+
+
+
+//=============================Procura tabela===========================//
+
+/*
+FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
+	int contador = 0;
+	int comecar = 0;
+	int i;
+	char nomeTabela[42];
+	char *pch;
+
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+    
+	while((c = fgetc(arquivo)) != EOF){
+
+		if (comecar == 1)
+		{
+			nomeTabela[contador] = c;
+			contador++;
+			if (c == ':')
+			{
+				comecar = 0;
+				contador = 0;
+				pch = strtok(nomeTabela, ":");
+				printf("%s == %s, %s\n", tabela, pch, nomeTabela);
+
+				if(strcmp(tabela, nomeTabela)==0){
+					printf("Pronto\n");
+
+					setbuf(stdout, NULL);
+					fflush(stdout);
+				}
+			}
+		}
+		if (c == '@')
+		{
+			comecar = 1;	
+		}
+	}
+*/
