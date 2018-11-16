@@ -235,6 +235,7 @@ int criarTabela(char* tabela)
 	scanf("%d", &resposta);
 
 	//Pegando os dados
+
 	valoresPrimarios* valorPrimario = (valoresPrimarios*) malloc(resposta*sizeof(valoresPrimarios));
 	for (i = 0; i < resposta; i++)
 	{
@@ -246,37 +247,29 @@ int criarTabela(char* tabela)
 			scanf("%s", &colunas[j].valor);
 			if (j == 0)
 			{
-				strcpy(valorPrimario[i].valor, colunas[j].valor);
-				for (k = 0; k < resposta; k++)
-				{
-					if (k != i)
+				saida = 0;
+				while(saida != 1){
+					strcpy(valorPrimario[i].valor, colunas[j].valor);
+					for (k = 0; k < resposta; k++)
 					{
-						if (strcmp(valorPrimario[k].valor, valorPrimario[i].valor)==0)
+						if (k != i)
 						{
-							printf("Ja existe!\n");
-							printf("Digitar outro valor\n");
-							printf("%d = %s: ", j, colunas[j].nome);
-							scanf("%s", &colunas[j].valor);
-
+							if (strcmp(valorPrimario[k].valor, valorPrimario[i].valor)==0)
+							{
+								printf("Ja existe!\n");
+								printf("Digitar outro valor\n");
+								printf("%d = %s: ", j, colunas[j].nome);
+								scanf("%s", &colunas[j].valor);
+								saida = 0;
+								break;
+							}
+							else{
+								saida = 1;
+							}
 						}
 					}
 				}
-				
 			}
-						//Em desenvolvimeto
-						/*
-						if (j == 0)
-						{
-							for (k = 0; k < numeroDeColunas; k++)
-							{
-								if(strcmp(colunas[i].valor, colunas[k].valor) == 0){
-									printf("Valor ja existe\n");
-									printf("Outro valor: ");
-									scanf("%s", colunas[i].valor);
-								}
-							}
-						}
-						*/
 
 			if (j == numeroDeColunas-1)
 			{
