@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-int lsitarTabelas();
+int listarTabelas();
 
-int ListarTodosDados();
+int listarTodosDados();
 
-int pesquizarValor();
+int pesquisarValor();

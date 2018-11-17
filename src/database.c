@@ -3,7 +3,35 @@
 
 int listarTabelas()
 {
+	FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
+	int contador = 0;
+	int comecar = 0;
+	int i;
+	char nomeTabela[42];
+	char *pch;
+	char c;
 
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+    
+	while((c = fgetc(arquivo)) != EOF){
+		if (comecar == 1)
+		{
+			nomeTabela[contador] = c;
+			contador++;
+			if (c == ':')
+			{
+				comecar = 0;
+				contador = 0;
+				pch = strtok(nomeTabela, ":");
+				printf(" %s\n", pch);
+			}
+		}
+		if (c == '@')
+		{
+			comecar = 1;	
+		}
+	}
 }
 int listarTodosDados()
 {
@@ -35,7 +63,4 @@ int pesquisarValor()
 		default:
 			printf("Fora dos limites\n");
 	}
-	
-
-
 }

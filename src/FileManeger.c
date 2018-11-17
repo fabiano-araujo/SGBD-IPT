@@ -10,8 +10,8 @@ int criarTabela(char* tabela)
 	char nomeTabela[42] = "@";
 	char quantidadeColunas[10];
 	char nomeDaColuna[40];
-	char tipoDaColuna[10];
-	char* nomeDoTipo[10];
+	//char tipoDaColuna[10];
+	//char* nomeDoTipo[10];
 	int contador=0;
 	int resposta;
 	int numeroDeColunas;
@@ -40,13 +40,13 @@ int criarTabela(char* tabela)
 					comecar = 0;
 					contador2 = 0;
 					pch = strtok(nomeDaTabela, ":");
-					printf("%s == %s, %s\n", tabela, pch, nomeDaTabela);
+					//printf("%s == %s, %s\n", tabela, pch, nomeDaTabela);
 
 					if(strcmp(tabela, nomeDaTabela)==0){
 						printf("Tabela ja existe\n");
 						printf("Digite um novo nome para a tabela:\n");
 						scanf("%s", tabela);
-						printf("%s\n", tabela);
+						//printf("%s\n", tabela);
 						saida = 0;
 						break;
 						//setbuf(stdout, NULL);
@@ -61,9 +61,7 @@ int criarTabela(char* tabela)
 				comecar = 1;	
 			}
 		}
-		
 	}
-
 	
 	fseek(arquivo, 0, SEEK_END);
 
@@ -116,7 +114,7 @@ int criarTabela(char* tabela)
 				scanf("%d", &tipo);
 				if (tipo == 1 || tipo == 2 || tipo == 3 || tipo == 4 || tipo == 5)
 				{
-					printf("pronto\n");
+					//printf("pronto\n");
 				}
 				else{
 					printf("Valor invalido\n");
@@ -129,46 +127,48 @@ int criarTabela(char* tabela)
 			strcat(formatando, "-");
 
 			fprintf(arquivo, "%s", formatando);
-			printf("Armazenado %d\n", contador);
+			//printf("Armazenado %d\n", contador);
 			//fflush(stdout);
 			//fflush(stdin);
 			contador++;
 		}
-	fprintf(arquivo, "(");
+		fprintf(arquivo, "(");
 
-	printf("Quantidade de Linhas: ");
-	scanf("%d", &resposta);
+		printf("Quantidade de Linhas: ");
+		scanf("%d", &resposta);
 
-	for (i = 0; i < resposta; i++)
-	{
-		char chavePrimaria[10] = "";
-		itoa(i, chavePrimaria, 10);
-		strcat(chavePrimaria, ",");
-		fprintf(arquivo, "%s", chavePrimaria);
-		printf("Linha %d\n", i+1);
-
-		for (j = 0; j < numeroDeColunas; j++)
+		for (i = 0; i < resposta; i++)
 		{
+			char chavePrimaria[10] = "";
+			itoa(i, chavePrimaria, 10);
+			strcat(chavePrimaria, ",");
+			fprintf(arquivo, "%s", chavePrimaria);
+			printf("Linha %d\n", i+1);
 
-			printf("%d = %s: ", j, colunas[j].nome);
-			scanf("%s", &colunas[j].valor);
-
-			if (j == numeroDeColunas-1)
+			for (j = 0; j < numeroDeColunas; j++)
 			{
-				if (i == resposta-1)
+
+				printf("%d = %s: ", j, colunas[j].nome);
+				scanf("%s", &colunas[j].valor);
+				//Verificar se o valor Digitado é do valor escolhido para a coluna
+
+
+				if (j == numeroDeColunas-1)
 				{
-					strcat(colunas[j].valor, ")");
-				}else{
-					strcat(colunas[j].valor, ".");
+					if (i == resposta-1)
+					{
+						strcat(colunas[j].valor, ")");
+					}else{
+						strcat(colunas[j].valor, ".");
+					}
 				}
+				else{
+					strcat(colunas[j].valor, ",");
+				}
+				fprintf(arquivo, "%s", colunas[j].valor);
+				setbuf(stdin, NULL);
 			}
-			else{
-				strcat(colunas[j].valor, ",");
-			}
-			fprintf(arquivo, "%s", colunas[j].valor);
-			setbuf(stdin, NULL);
 		}
-	}
 
 
 	}
@@ -177,8 +177,8 @@ int criarTabela(char* tabela)
 	//Escolha de opcao para chave primaria manual
 	else{
 		char formatandoPK[] = "";
-		printf("ATENCAO: a chave primaria precisa ser a primeira coluna!\nsendo Obrigatoriamente do tipo INT\n");
-		printf("nome da Coluna que sera a chave primaria: ");
+		printf("\nATENCAO: a chave primaria precisa ser a primeira coluna!\nsendo Obrigatoriamente do tipo INT\n");
+		printf("Nome da Coluna que sera a chave primaria: ");
 		scanf("%s", &nomeDaColuna);
 		strcpy(colunas[contador].nome, nomeDaColuna);
 		colunas[contador].tipo = 2;
@@ -194,7 +194,7 @@ int criarTabela(char* tabela)
 			char formatando[45] = "";
 			tipo = 6;
 
-			printf("Nome da coluna %d: ", contador+1);
+			printf("\nNome da coluna %d: ", contador+1);
 			scanf("%s", &nomeDaColuna);
 			strcpy(colunas[contador].nome, nomeDaColuna);
 
@@ -211,7 +211,7 @@ int criarTabela(char* tabela)
 				scanf("%d", &tipo);
 				if (tipo == 1 || tipo == 2 || tipo == 3 || tipo == 4 || tipo == 5)
 				{
-					printf("pronto\n");
+					//printf("pronto\n");
 				}
 				else{
 					printf("Valor invalido\n");
@@ -224,69 +224,69 @@ int criarTabela(char* tabela)
 			strcat(formatando, "-");
 
 			fprintf(arquivo, "%s", formatando);
-			printf("Armazenado %d\n", contador);
+			//printf("Armazenado %d\n", contador);
 			//fflush(stdout);
 			//fflush(stdin);
 			contador++;		
 		}
-	fprintf(arquivo, "(");
+		fprintf(arquivo, "(");
 
-	printf("Quantidade de Linhas: ");
-	scanf("%d", &resposta);
+		printf("Quantidade de Linhas: ");
+		scanf("%d", &resposta);
 
-	//Pegando os dados
+		//Pegando os dados
 
-	valoresPrimarios* valorPrimario = (valoresPrimarios*) malloc(resposta*sizeof(valoresPrimarios));
-	for (i = 0; i < resposta; i++)
-	{
-		printf("Linha %d\n", i+1);
-
-		for (j = 0; j < numeroDeColunas; j++)
+		valoresPrimarios* valorPrimario = (valoresPrimarios*) malloc(resposta*sizeof(valoresPrimarios));
+		for (i = 0; i < resposta; i++)
 		{
-			printf("%d = %s: ", j, colunas[j].nome);
-			scanf("%s", &colunas[j].valor);
-			if (j == 0)
+			printf("Linha %d\n", i+1);
+
+			for (j = 0; j < numeroDeColunas; j++)
 			{
-				saida = 0;
-				while(saida != 1){
-					strcpy(valorPrimario[i].valor, colunas[j].valor);
-					for (k = 0; k < resposta; k++)
-					{
-						if (k != i)
+				printf("%d = %s: ", j, colunas[j].nome);
+				scanf("%s", &colunas[j].valor);
+				if (j == 0)
+				{
+					saida = 0;
+					while(saida != 1){
+						strcpy(valorPrimario[i].valor, colunas[j].valor);
+						for (k = 0; k < resposta; k++)
 						{
-							if (strcmp(valorPrimario[k].valor, valorPrimario[i].valor)==0)
+							if (k != i)
 							{
-								printf("Ja existe!\n");
-								printf("Digitar outro valor\n");
-								printf("%d = %s: ", j, colunas[j].nome);
-								scanf("%s", &colunas[j].valor);
-								saida = 0;
-								break;
-							}
-							else{
-								saida = 1;
+								if (strcmp(valorPrimario[k].valor, valorPrimario[i].valor)==0)
+								{
+									printf("Ja existe!\n");
+									printf("Digitar outro valor: \n");
+									printf("%d = %s: ", j, colunas[j].nome);
+									scanf("%s", &colunas[j].valor);
+									saida = 0;
+									break;
+								}
+								else{
+									saida = 1;
+								}
 							}
 						}
 					}
 				}
-			}
 
-			if (j == numeroDeColunas-1)
-			{
-				if (i == resposta-1)
+				if (j == numeroDeColunas-1)
 				{
-					strcat(colunas[j].valor, ")");
-				}else{
-					strcat(colunas[j].valor, ".");
+					if (i == resposta-1)
+					{
+						strcat(colunas[j].valor, ")");
+					}else{
+						strcat(colunas[j].valor, ".");
+					}
 				}
+				else{
+					strcat(colunas[j].valor, ",");
+				}
+				fprintf(arquivo, "%s", colunas[j].valor);
+				setbuf(stdin, NULL);
 			}
-			else{
-				strcat(colunas[j].valor, ",");
-			}
-			fprintf(arquivo, "%s", colunas[j].valor);
-			setbuf(stdin, NULL);
 		}
-	}
 
 	}
 
@@ -356,8 +356,8 @@ int criarLinha(char* tabela)
 					//memset(nomeTabela,'', 42);
 					//printf("%s\n", nomeTabela);
 
-					setbuf(stdout, NULL);
-					fflush(stdout);
+					//setbuf(stdout, NULL);
+					//fflush(stdout);
 				}
 				//for (i = 0; i < tolenght(nomeTabela); i++)
 				//	{

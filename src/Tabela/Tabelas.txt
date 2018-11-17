@@ -37,3 +37,5 @@
 @alx:2:cpf!2-nome!5-(132,alexandre.134,aline.123,nada.123,ale.132,ola);
 @rty:2:idade!2-nome!5-(12,asdasd.12,adsf.12,fgafdf);
 @alexand:2:idade!2-nome!5-(12,aline.13,alexandre.7,nada);
+@qwe:2:PrimaryKey!2-Nome!5-idade!2-(0,alexandre,20.1,Aline,15);
+@alexna:2:Nome!2-idade!2-(123,adas.123,asd);
