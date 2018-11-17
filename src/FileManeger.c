@@ -148,9 +148,10 @@ int criarTabela(char* tabela)
 			for (j = 0; j < numeroDeColunas; j++)
 			{
 
+				//Verificar se o valor Digitado é do valor escolhido para a coluna
 				printf("%d = %s: ", j, colunas[j].nome);
 				scanf("%s", &colunas[j].valor);
-				//Verificar se o valor Digitado é do valor escolhido para a coluna
+				
 
 
 				if (j == numeroDeColunas-1)

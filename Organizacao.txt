@@ -16,8 +16,3 @@
 . separação das linhas
 , separação de cada elemento da linha
 ; finalização da tabela
-
-struct generico()
-{
-	
-}
