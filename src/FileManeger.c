@@ -160,7 +160,7 @@ int criarTabela(char* tabela)
 					{
 						strcat(colunas[j].valor, ")");
 					}else{
-						strcat(colunas[j].valor, ".");
+						strcat(colunas[j].valor, "#");
 					}
 				}
 				else{
@@ -278,7 +278,7 @@ int criarTabela(char* tabela)
 					{
 						strcat(colunas[j].valor, ")");
 					}else{
-						strcat(colunas[j].valor, ".");
+						strcat(colunas[j].valor, "#");
 					}
 				}
 				else{

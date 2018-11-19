@@ -3,7 +3,7 @@
 typedef struct{
 	char nome[40];
 	int tipo;
-	char vaolunaNomelor[200];
+	char valor[200];
 }colunaNomeTipo;
 typedef struct{
 	char valor[200];
