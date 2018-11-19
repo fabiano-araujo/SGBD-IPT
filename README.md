@@ -1,6 +1,6 @@
 # SGBD-ITP
 ```
-1. Criar um tabela
+- [x]1. Criar um tabela
 ```
 ```
 2. Listar todas as tabelas
