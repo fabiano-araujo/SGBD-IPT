@@ -43,3 +43,5 @@
 @ert:2:PrimaryKey!2-nome!3-idade!2-(0,Alenxadre,20.1,nada,12);
 @wer:2:PrimaryKey!2-nome!5-idade!2-(0,wert,12#1,gkdfg,32);
 @aluno:3:PrimaryKey!2-Nome!5-idade!2-nota!3-(0,asdasd,12,12.4#1,rtirt,123,32.5);
+@Alexandre:2:cpf!2-nome!5-(;
+@dfg:2:cpf!2-nomw!5-();
