@@ -7,7 +7,7 @@
 ```
 3. Criar uma nova linha na tabela
   
-- [x]4. Listar todos os dados de uma tabela
+- [x] 4. Listar todos os dados de uma tabela
   
 5. Pesquisar valor em uma tabela
 
