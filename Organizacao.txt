@@ -13,6 +13,6 @@
 ! finalização do nome da coluna, logo apos ficará seu tipo
 - separação entre os nomes das colunas
 () indicará o incio e o fim do conteudo da tabela
-. separação das linhas (alterar: conflito com armazenamento de dados do tipo float) S: &*$#
+# separação das linhas
 , separação de cada elemento da linha
 ; finalização da tabela
