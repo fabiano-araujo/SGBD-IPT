@@ -158,7 +158,7 @@ int criarTabela(char* tabela)
 				{
 					if (i == resposta-1)
 					{
-						strcat(colunas[j].valor, ")");
+						
 					}else{
 						strcat(colunas[j].valor, "#");
 					}
@@ -276,7 +276,7 @@ int criarTabela(char* tabela)
 				{
 					if (i == resposta-1)
 					{
-						strcat(colunas[j].valor, ")");
+						
 					}else{
 						strcat(colunas[j].valor, "#");
 					}
@@ -305,7 +305,7 @@ int criarTabela(char* tabela)
 	printf("%d\n", numeroDeColunas);
 
 	fflush(stdout);
-	fprintf(arquivo, ";");
+	fprintf(arquivo, ");");
 	fprintf(arquivo, "\n");
 	fclose(arquivo);
 }
