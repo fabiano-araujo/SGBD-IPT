@@ -80,9 +80,7 @@ int criarTabela(char* tabela)
 
 	numeroDeColunas = atoi(quantidadeColunas);//Função nova
 
-	strcat(quantidadeColunas, ":");
 
-	fprintf(arquivo, "%s", quantidadeColunas);
 	colunaNomeTipo* colunas = (colunaNomeTipo*) malloc(numeroDeColunas*sizeof(colunaNomeTipo));
 
 	//Decidindo se tera chave primaria automatica ou de preferencia do usuario;
@@ -90,6 +88,10 @@ int criarTabela(char* tabela)
 	scanf("%d", &resposta);
 	if (resposta == 0)
 	{	
+		itoa(numeroDeColunas+1, quantidadeColunas, 10);
+		strcat(quantidadeColunas, ":");
+
+		fprintf(arquivo, "%s", quantidadeColunas);
 		//Chave primaria automatica
 		//Obtendo nome e tipo da coluna
 		fprintf(arquivo, "PrimaryKey!2-");
@@ -134,7 +136,7 @@ int criarTabela(char* tabela)
 		}
 		fprintf(arquivo, "(");
 
-		printf("Quantidade de Linhas: ");
+		printf("Quantidade de Linhas inicialmente: ");
 		scanf("%d", &resposta);
 
 		for (i = 0; i < resposta; i++)
@@ -177,6 +179,9 @@ int criarTabela(char* tabela)
 
 	//Escolha de opcao para chave primaria manual
 	else{
+		strcat(quantidadeColunas, ":");
+
+		fprintf(arquivo, "%s", quantidadeColunas);
 		char formatandoPK[] = "";
 		printf("\nATENCAO: a chave primaria precisa ser a primeira coluna!\nsendo Obrigatoriamente do tipo INT\n");
 		printf("Nome da Coluna que sera a chave primaria: ");
@@ -232,7 +237,7 @@ int criarTabela(char* tabela)
 		}
 		fprintf(arquivo, "(");
 
-		printf("Quantidade de Linhas: ");
+		printf("Quantidade de Linhas inicialmente: ");
 		scanf("%d", &resposta);
 
 		//Pegando os dados
@@ -290,16 +295,7 @@ int criarTabela(char* tabela)
 		}
 
 	}
-
-
-
-
-
-
-
-
-
-	//Receber os dados quando a chave primaria é automatica
+	
 	
 	printf("%s\n", nomeTabela);
 	printf("%d\n", numeroDeColunas);
@@ -321,9 +317,21 @@ int criarLinha(char* tabela)
 	int contador = 0;
 	int comecar = 0;
 	int i;
+	int encontrada = 0;
+	int criarMalloc = 0;
+	int numeroDeColunas = 0;
+	int inicionomeColunas = 0;
+	int nomeColunas = 0;
+	int quantidadeColunas = 0;
+	int tipoColuna = 0;
+	int tipoDaColuna = 0;
+	int valores = 0;
 	char nomeTabela[42];
+	char nomesColunas[40];
 	char *pch;
 	char c;
+	int coluna = 0;
+	colunaNomeTipo* colunas;
 
 
 	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
@@ -337,6 +345,71 @@ int criarLinha(char* tabela)
     
 	while((c = fgetc(arquivo)) != EOF){
 		//printf("%c", c);
+		if (valores == 1)
+		{
+			
+		}
+		if (tipoDaColuna == 1)
+		{
+			colunas[coluna].tipo = (int)c;
+			printf("%c, coluna = %d\n", colunas[coluna].tipo, coluna);
+			coluna++;
+			tipoDaColuna = 0;
+		}
+		//if(tipoColuna == 1 && encontrada == 1)
+		//{
+		//	tipoDaColuna = 1;
+		//	tipoColuna = 0;
+		//}
+		if (nomeColunas == 1 && encontrada == 1)
+		{
+			nomesColunas[contador] = c;
+			contador++;
+			if(c == '!')
+			{
+				contador = 0;
+				pch = strtok(nomesColunas, "!");
+				strcpy(colunas[coluna].nome,pch);
+				printf("%s\n", colunas[coluna].nome);
+				nomeColunas = 0;
+				tipoDaColuna = 1;
+			}
+		}
+
+		if (inicionomeColunas == 1 && c == ':' && encontrada == 1)
+		{
+			nomeColunas = 1;
+			inicionomeColunas = 0;
+		}
+		if (c == '(' && encontrada == 1);
+		{
+			valores = 1;
+		}
+		if (c == '-' && encontrada == 1)
+		{
+			nomeColunas = 1;
+		}
+
+		if (quantidadeColunas == 1)
+		{
+			printf("%c\n", c);
+			numeroDeColunas = (int)c;
+			quantidadeColunas = 0;
+			if (criarMalloc != 2)
+			{
+				criarMalloc = 1;
+			}
+			inicionomeColunas = 1;
+		}
+		if (criarMalloc == 1)
+		{
+			colunas = (colunaNomeTipo*) malloc(numeroDeColunas*sizeof(colunaNomeTipo));
+			criarMalloc = 2;
+		}
+		//if (nomeColunas == 1)
+		//{
+		//	
+		//}
 		if (comecar == 1)
 		{
 			//printf("%c", c);
@@ -352,6 +425,8 @@ int criarLinha(char* tabela)
 
 				if(strcmp(tabela, nomeTabela)==0){
 					printf("Pronto\n");
+					quantidadeColunas = 1;
+					encontrada = 1;
 					//printf("%s\n", nomeTabela);
 					//strcpy(nomeTabela, vetorVazio);
 					//memset(nomeTabela,'', 42);
@@ -360,17 +435,30 @@ int criarLinha(char* tabela)
 					//setbuf(stdout, NULL);
 					//fflush(stdout);
 				}
-				//for (i = 0; i < tolenght(nomeTabela); i++)
-				//	{
-				//		nomeTabela[i] = ' ';
-				//	}
 			}
 		}
 		if (c == '@')
 		{
-			comecar = 1;	
+			comecar = 1;
+			printf("1\n");
+		}
+		if (c == ';' && encontrada == 1)
+		{
+			//printf("2\n");
+			break;
 		}
 	}
+	fclose(arquivo);
+	//printf("%s\n", colunas[0].nome);
+	//printf("%d\n", colunas[0].tipo-48);
+	//printf("%s\n", colunas[1].nome);
+	//printf("%d\n", colunas[1].tipo-48);
+	//printf("%s\n", colunas[2].nome);
+	//printf("%d\n", colunas[2].tipo-48);
+	//printf("%s\n", colunas[3].nome);
+	//printf("%d\n", colunas[3].tipo-48);
+	
+	
 	
 }
 int apagarValor(char* tabela)
