@@ -330,6 +330,7 @@ int criarLinha(char* tabela)
 	char nomesColunas[40];
 	char *pch;
 	char c;
+
 	int coluna = 0;
 	colunaNomeTipo* colunas;
 
