@@ -44,7 +44,7 @@ int criarTabela(char* tabela)
 
 					if(strcmp(tabela, nomeDaTabela)==0){
 						printf("Tabela ja existe\n");
-						printf("Digite um novo nome para a tabela:\n");
+						printf("Digite um novo nome para a tabela: ");
 						scanf("%s", tabela);
 						//printf("%s\n", tabela);
 						saida = 0;
