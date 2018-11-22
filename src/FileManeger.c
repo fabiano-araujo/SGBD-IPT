@@ -7,6 +7,40 @@
 
 int criarTabela(char* tabela)
 {
+
+
+	char pasta[30] = "Tabelas/";
+	strcat(pasta, tabela);
+	strcat(pasta, ".txt");
+
+	FILE* arq = fopen(pasta, "r");
+	if (!arq)
+	{
+		fclose(arq);
+	}
+	else
+	{
+		printf("Tabela existente\n");
+		fclose(arq);
+		return 1;
+	}
+
+	FILE* arquivo = fopen(pasta, "a+");
+
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+
+
+	FILE* tabelas = fopen("Tabelas/tabs.txt", "a+");
+
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+
+	fseek(tabelas, 0, SEEK_END);
+	fprintf(tabelas, "%s\n", tabela);
+
+	fclose(tabelas);
+
 	char nomeTabela[42] = "@";
 	char quantidadeColunas[10];
 	char nomeDaColuna[40];
@@ -27,7 +61,7 @@ int criarTabela(char* tabela)
 	char *pch;
 	char c;
 	int saida = 0;
-	FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
+	/*
 	while(saida != 1){
 		fseek(arquivo, 0, SEEK_SET);
 		while((c = fgetc(arquivo)) != EOF){
@@ -62,19 +96,20 @@ int criarTabela(char* tabela)
 			}
 		}
 	}
+	*/
 	
-	fseek(arquivo, 0, SEEK_END);
+	//fseek(arquivo, 0, SEEK_END);
 
-	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
-	else printf("Tudo OK ao abrir arquivo\n");
+	
 
 	//Nome databela
-	strcat(nomeTabela, tabela);
-	strcat(nomeTabela, ":");
+	//strcat(nomeTabela, tabela);
+	//strcat(nomeTabela, ":");
 
-	fprintf(arquivo, "%s", nomeTabela);
+	//fprintf(arquivo, "%s", nomeTabela);
 
 	//quantidade de Colunas
+
 	printf("Quantas Colunas deseja? ");
 	scanf("%s", &quantidadeColunas);
 
@@ -86,6 +121,8 @@ int criarTabela(char* tabela)
 	//Decidindo se tera chave primaria automatica ou de preferencia do usuario;
 	printf("Deseja escolher a chave primaria?(1 = yes, 0 = no) ");
 	scanf("%d", &resposta);
+
+	//Escolha de opcao para chave primaria automatica
 	if (resposta == 0)
 	{	
 		itoa(numeroDeColunas+1, quantidadeColunas, 10);
@@ -172,13 +209,12 @@ int criarTabela(char* tabela)
 				setbuf(stdin, NULL);
 			}
 		}
-
-
 	}
 
 
 	//Escolha de opcao para chave primaria manual
-	else{
+	else
+	{
 		strcat(quantidadeColunas, ":");
 
 		fprintf(arquivo, "%s", quantidadeColunas);
@@ -293,7 +329,6 @@ int criarTabela(char* tabela)
 				setbuf(stdin, NULL);
 			}
 		}
-
 	}
 	
 	
@@ -313,7 +348,28 @@ int criarTabela(char* tabela)
 
 int criarLinha(char* tabela)
 {
-	FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
+
+	char pasta[30] = "Tabelas/";
+	strcat(pasta, tabela);
+	strcat(pasta, ".txt");
+
+	FILE* arq = fopen(pasta, "r");
+	if (!arq)
+	{
+		printf("Tabela inexistente\n");
+		fclose(arq);
+		return 1;
+	}
+	else
+	{
+		fclose(arq);
+	}
+
+	FILE* arquivo = fopen(pasta, "a+");
+
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+
 	int contador = 0;
 	int comecar = 0;
 	int i;
@@ -335,8 +391,7 @@ int criarLinha(char* tabela)
 	colunaNomeTipo* colunas;
 
 
-	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
-	else printf("Tudo OK ao abrir arquivo\n");
+	
 
 	//          COM FSCANF
 	//fscanf(arquivo, "@%s:", &nomeTabela);
@@ -424,10 +479,9 @@ int criarLinha(char* tabela)
 				pch = strtok(nomeTabela, ":");
 				printf("%s == %s, %s\n", tabela, pch, nomeTabela);
 
-				if(strcmp(tabela, nomeTabela)==0){
-					printf("Pronto\n");
-					quantidadeColunas = 1;
-					encontrada = 1;
+				printf("Pronto\n");
+				quantidadeColunas = 1;
+				encontrada = 1;
 					//printf("%s\n", nomeTabela);
 					//strcpy(nomeTabela, vetorVazio);
 					//memset(nomeTabela,'', 42);
@@ -435,7 +489,6 @@ int criarLinha(char* tabela)
 
 					//setbuf(stdout, NULL);
 					//fflush(stdout);
-				}
 			}
 		}
 		if (c == '@')
