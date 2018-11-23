@@ -12,9 +12,9 @@ typedef struct{
 
 typedef struct{
 	char valor[40];
-}valores;
+}variaveis;
 
-valores **valor;
+variaveis **valor;
 
 int criarTabela(char* tabela);
 

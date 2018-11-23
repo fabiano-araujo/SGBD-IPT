@@ -382,6 +382,8 @@ int criarLinha(char* tabela)
 	int tipoColuna = 0;
 	int tipoDaColuna = 0;
 	int valores = 0;
+	int mallocDados = 0;
+	int dados = 0;
 	char nomeTabela[42];
 	char nomesColunas[40];
 	char *pch;
@@ -390,8 +392,8 @@ int criarLinha(char* tabela)
 	int coluna = 0;
 	colunaNomeTipo* colunas;
 
-
 	
+
 
 	//          COM FSCANF
 	//fscanf(arquivo, "@%s:", &nomeTabela);
@@ -401,9 +403,15 @@ int criarLinha(char* tabela)
     
 	while((c = fgetc(arquivo)) != EOF){
 		//printf("%c", c);
-		if (valores == 1)
+		if (dados == 1)
 		{
 			
+		}
+		if (mallocDados == 1)
+		{
+			valor = (variaveis**) malloc(numeroDeColunas*sizeof(variaveis*));
+			dados = 1;
+			mallocDados = 0;
 		}
 		if (tipoDaColuna == 1)
 		{
@@ -439,7 +447,7 @@ int criarLinha(char* tabela)
 		}
 		if (c == '(' && encontrada == 1);
 		{
-			valores = 1;
+			mallocDados = 1;
 		}
 		if (c == '-' && encontrada == 1)
 		{
@@ -534,14 +542,6 @@ int apagarTabela(char* tabela)
 
 
 
-
-
-
-
-
-
-
-
 char* verificarTipo(int Tipo)
 {
 	//if (Tipo == 1)
@@ -595,43 +595,6 @@ char* verificarTipo(int Tipo)
 
 
 
-//=============================Procura tabela===========================//
 
-/*
-FILE* arquivo = fopen("Tabela/Tabelas.txt", "a+");
-	int contador = 0;
-	int comecar = 0;
-	int i;
-	char nomeTabela[42];
-	char *pch;
 
-	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
-	else printf("Tudo OK ao abrir arquivo\n");
-    
-	while((c = fgetc(arquivo)) != EOF){
 
-		if (comecar == 1)
-		{
-			nomeTabela[contador] = c;
-			contador++;
-			if (c == ':')
-			{
-				comecar = 0;
-				contador = 0;
-				pch = strtok(nomeTabela, ":");
-				printf("%s == %s, %s\n", tabela, pch, nomeTabela);
-
-				if(strcmp(tabela, nomeTabela)==0){
-					printf("Pronto\n");
-
-					setbuf(stdout, NULL);
-					fflush(stdout);
-				}
-			}
-		}
-		if (c == '@')
-		{
-			comecar = 1;	
-		}
-	}
-*/
