@@ -103,10 +103,10 @@ int criarTabela(char* tabela)
 	
 
 	//Nome databela
-	//strcat(nomeTabela, tabela);
-	//strcat(nomeTabela, ":");
+	strcat(nomeTabela, tabela);
+	strcat(nomeTabela, ":");
 
-	//fprintf(arquivo, "%s", nomeTabela);
+	fprintf(arquivo, "%s", nomeTabela);
 
 	//quantidade de Colunas
 
@@ -388,6 +388,8 @@ int criarLinha(char* tabela)
 	int posicaoL = 0;
 	int posicaoC = 0;
 	int vaiProsDados = 0;
+	int contMatriz = 1;
+	int quantidadeLinhas = 1;
 	char dado[20];
 	char nomeTabela[42];
 	char nomesColunas[40];
@@ -404,37 +406,63 @@ int criarLinha(char* tabela)
     //          COM FGETC
     
 	while((c = fgetc(arquivo)) != EOF){
-		printf("%c", c);
+		//printf("%c", c);
 		if (dados == 1)
 		{
 			dado[contador]=c;
 			contador++;
 			if(c == ',')
 			{
+				contador = 0;
 				pch = strtok(dado, ",");
 				strcpy(valor[posicaoC][posicaoL].valor, dado);
 				contador = 0;
-				printf("%s\n", valor[posicaoC][posicaoL].valor);
+				printf("-%s\n", valor[posicaoC][posicaoL].valor);
+				posicaoL++;
+			}
+			else if(c == '#')
+			{
+				contador = 0;
+				pch = strtok(dado, "#");
+				strcpy(valor[posicaoC][posicaoL].valor, dado);
+				contador = 0;
+				printf("-%s\n", valor[posicaoC][posicaoL].valor);
+				posicaoL=0;
+				quantidadeLinhas++;
+
+				contMatriz++;
+				valor = (variaveis**) realloc(valor,contMatriz*sizeof(variaveis*));
+				valor[contMatriz-1] = (variaveis*)malloc(numeroDeColunas*sizeof(variaveis));
+				posicaoC++;
+
+			}
+			else if(c == ')')
+			{
+				contador = 0;
+				pch = strtok(dado, ")");
+				strcpy(valor[posicaoC][posicaoL].valor, dado);
+				contador = 0;
+				printf("-%s\n", valor[posicaoC][posicaoL].valor);
 			}
 		}
-		if (mallocDados == 1)
+		if (vaiProsDados == 1 && c == '(')
 		{
-			valor[0] = (variaveis*)malloc(1*sizeof(variaveis));
-			mallocDados = 0;
-			dados = 1;
+			//printf("%d %c\n", vaiProsDados, c);
+			mallocColunasDados = 1;
 		}
 		if (mallocColunasDados == 1)
 		{
-			valor = (variaveis**) malloc(numeroDeColunas*sizeof(variaveis*));
+			valor = (variaveis**) malloc(contMatriz*sizeof(variaveis*));
 			mallocDados = 1;
 			mallocColunasDados = 0;
 		}
-
-		if (vaiProsDados == 1 && c == '(')
+		if (mallocDados == 1)
 		{
-			printf("%d %c\n", vaiProsDados, c);
-			mallocColunasDados = 1;
+			valor[0] = (variaveis*)malloc(numeroDeColunas*sizeof(variaveis));
+			mallocDados = 0;
+			dados = 1;
 		}
+
 
 		if (tipoDaColuna == 1)
 		{
@@ -554,9 +582,27 @@ int criarLinha(char* tabela)
 		}
 	}
 	fclose(arquivo);
+	int j;
+	printf("-> L: %d. C: %d\n", quantidadeLinhas, numeroDeColunas-48);
+	for (i = 0; i < quantidadeLinhas; i++)
+	{
+		for (j = 0; j < numeroDeColunas-48; j++)
+		{
+			//printf("%12d %d", i, j);
+			printf("%12s", valor[i][j].valor);
+		}
+		printf("\n");
+	}
 
+	// printf("%s\n", valor[0][0].valor);
+	// printf("%s\n", valor[0][1].valor);
+	// printf("%s\n", valor[0][2].valor);
 
+	// printf("%s\n", valor[1][0].valor);
 
+	// printf("%s\n", valor[1][1].valor);
+
+	// printf("%s\n", valor[1][2].valor);
 
 	//printf("%s\n", colunas[0].nome);
 	//printf("%d\n", colunas[0].tipo-48);
