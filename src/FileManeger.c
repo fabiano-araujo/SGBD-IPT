@@ -382,17 +382,19 @@ int criarLinha(char* tabela)
 	int tipoColuna = 0;
 	int tipoDaColuna = 0;
 	int valores = 0;
+	int mallocColunasDados = 0;
 	int mallocDados = 0;
 	int dados = 0;
+	int posicaoL = 0;
+	int posicaoC = 0;
+	int vaiProsDados = 0;
+	char dado[20];
 	char nomeTabela[42];
 	char nomesColunas[40];
 	char *pch;
 	char c;
-
 	int coluna = 0;
 	colunaNomeTipo* colunas;
-
-	
 
 
 	//          COM FSCANF
@@ -402,41 +404,77 @@ int criarLinha(char* tabela)
     //          COM FGETC
     
 	while((c = fgetc(arquivo)) != EOF){
-		//printf("%c", c);
+		printf("%c", c);
 		if (dados == 1)
 		{
-			
+			dado[contador]=c;
+			contador++;
+			if(c == ',')
+			{
+				pch = strtok(dado, ",");
+				strcpy(valor[posicaoC][posicaoL].valor, dado);
+				contador = 0;
+				printf("%s\n", valor[posicaoC][posicaoL].valor);
+			}
 		}
 		if (mallocDados == 1)
 		{
-			valor = (variaveis**) malloc(numeroDeColunas*sizeof(variaveis*));
-			dados = 1;
+			valor[0] = (variaveis*)malloc(1*sizeof(variaveis));
 			mallocDados = 0;
+			dados = 1;
 		}
+		if (mallocColunasDados == 1)
+		{
+			valor = (variaveis**) malloc(numeroDeColunas*sizeof(variaveis*));
+			mallocDados = 1;
+			mallocColunasDados = 0;
+		}
+
+		if (vaiProsDados == 1 && c == '(')
+		{
+			printf("%d %c\n", vaiProsDados, c);
+			mallocColunasDados = 1;
+		}
+
 		if (tipoDaColuna == 1)
 		{
 			colunas[coluna].tipo = (int)c;
 			printf("%c, coluna = %d\n", colunas[coluna].tipo, coluna);
 			coluna++;
 			tipoDaColuna = 0;
+			//printf("coluna = %d, numeroDeColunas == %d\n", coluna+1, numeroDeColunas-48);
+			if (coluna == numeroDeColunas-48)
+			{
+				encontrada = 0;
+				vaiProsDados = 1;
+				//printf("encontrada = %d\n", encontrada);
+			}
+			//printf("%d, numeroDeColunas: %d\n", nomeColunas, numeroDeColunas-48);
 		}
 		//if(tipoColuna == 1 && encontrada == 1)
 		//{
 		//	tipoDaColuna = 1;
 		//	tipoColuna = 0;
 		//}
+		
+
 		if (nomeColunas == 1 && encontrada == 1)
 		{
 			nomesColunas[contador] = c;
 			contador++;
+			//printf("c: %c. nomesColunas: %s. contador: %d ", c, nomesColunas, contador);
+			//printf("passou3\n");
 			if(c == '!')
 			{
 				contador = 0;
+				//printf("Passou4\n");
 				pch = strtok(nomesColunas, "!");
+				//printf("pch %s nomesColunas %s\n", pch, nomesColunas);
 				strcpy(colunas[coluna].nome,pch);
 				printf("%s\n", colunas[coluna].nome);
 				nomeColunas = 0;
 				tipoDaColuna = 1;
+				//printf("Passou5\n");
 			}
 		}
 
@@ -444,16 +482,13 @@ int criarLinha(char* tabela)
 		{
 			nomeColunas = 1;
 			inicionomeColunas = 0;
-		}
-		if (c == '(' && encontrada == 1);
-		{
-			mallocDados = 1;
+			//printf("passou2\n");
 		}
 		if (c == '-' && encontrada == 1)
 		{
 			nomeColunas = 1;
 		}
-
+		
 		if (quantidadeColunas == 1)
 		{
 			printf("%c\n", c);
@@ -464,10 +499,18 @@ int criarLinha(char* tabela)
 				criarMalloc = 1;
 			}
 			inicionomeColunas = 1;
+			//printf("Passou1\n");
 		}
 		if (criarMalloc == 1)
 		{
 			colunas = (colunaNomeTipo*) malloc(numeroDeColunas*sizeof(colunaNomeTipo));
+			if (colunas == NULL)
+			{
+				printf("malloc colunas BAD\n");
+			}
+			else{
+				printf("malloc colunas ok\n");
+			}
 			criarMalloc = 2;
 		}
 		//if (nomeColunas == 1)
@@ -485,7 +528,7 @@ int criarLinha(char* tabela)
 				comecar = 0;
 				contador = 0;
 				pch = strtok(nomeTabela, ":");
-				printf("%s == %s, %s\n", tabela, pch, nomeTabela);
+				//printf("%s == %s, %s\n", tabela, pch, nomeTabela);
 
 				printf("Pronto\n");
 				quantidadeColunas = 1;
@@ -511,6 +554,10 @@ int criarLinha(char* tabela)
 		}
 	}
 	fclose(arquivo);
+
+
+
+
 	//printf("%s\n", colunas[0].nome);
 	//printf("%d\n", colunas[0].tipo-48);
 	//printf("%s\n", colunas[1].nome);
@@ -592,8 +639,13 @@ char* verificarTipo(int Tipo)
 	*/
 }
 
-
-
+/*================= O if bugado =====================*/
+// if (c == '(' && vaiProsDados == 1);
+// 		{
+// 			mallocColunasDados = 1;
+// 			printf("c: %c. ola %d\n", c, vaiProsDados);
+// 			//nomeColunas =0;
+// 		}
 
 
 
