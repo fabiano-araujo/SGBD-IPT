@@ -407,6 +407,15 @@ int criarLinha(char* tabela)
     
 	while((c = fgetc(arquivo)) != EOF){
 		//printf("%c", c);
+		// if(c == "\0")
+		// {
+		// 	contador = 0;
+		// 	pch = strtok(dado, "i");
+		// 	strcpy(valor[posicaoC][posicaoL].valor, dado);
+		// 	contador = 0;
+		// 	dados = 0;
+		// 	printf("-%s\n", valor[posicaoC][posicaoL].valor);
+		// }
 		if (dados == 1)
 		{
 			dado[contador]=c;
@@ -436,14 +445,7 @@ int criarLinha(char* tabela)
 				posicaoC++;
 
 			}
-			else if(c == ')')
-			{
-				contador = 0;
-				pch = strtok(dado, ")");
-				strcpy(valor[posicaoC][posicaoL].valor, dado);
-				contador = 0;
-				printf("-%s\n", valor[posicaoC][posicaoL].valor);
-			}
+			
 		}
 		if (vaiProsDados == 1 && c == '(')
 		{
@@ -581,7 +583,14 @@ int criarLinha(char* tabela)
 			break;
 		}
 	}
-	fclose(arquivo);
+
+	contador = 0;
+	pch = strtok(dado, "i");
+	strcpy(valor[posicaoC][posicaoL].valor, dado);
+	contador = 0;
+	printf("-%s\n", valor[posicaoC][posicaoL].valor);
+
+	
 	int j;
 	printf("-> L: %d. C: %d\n", quantidadeLinhas, numeroDeColunas-48);
 	for (i = 0; i < quantidadeLinhas; i++)
@@ -612,7 +621,69 @@ int criarLinha(char* tabela)
 	//printf("%d\n", colunas[2].tipo-48);
 	//printf("%s\n", colunas[3].nome);
 	//printf("%d\n", colunas[3].tipo-48);
-	
+
+	fseek(arquivo, 0, SEEK_END);
+	int nPK;
+	char valorP[10];
+	fprintf(arquivo, "#");
+	if(strcmp(colunas[0].nome, "PrimaryKey") == 0)
+	{
+		printf("PrimaryKey automatica\n");
+
+		for (i = 0; i < quantidadeLinhas; i++)
+		{
+			for (j = 0; j < quantidadeLinhas; j++)
+			{
+				nPK = atoi(valor[j][0].valor);
+				printf("%4s      nPK: %4d.      i: %4d.      j:%4d\n", valor[j][0].valor, nPK, i, j);
+				if (i == nPK)
+				{
+					printf("é igual\n");
+					break;
+				}
+
+			}
+			if (i+1 == quantidadeLinhas)
+			{
+				itoa(i+1, valorP, 10);
+				strcat(valorP, ",");
+				fprintf(arquivo, "%s", valorP);
+			}
+		}
+
+
+
+		fclose(arquivo);
+
+		// for (j = 0; j < numeroDeColunas-48; j++)
+		// 	{
+
+		// 		//Verificar se o valor Digitado é do valor escolhido para a coluna
+		// 		printf("%d = %s: ", j, colunas[j].nome);
+		// 		scanf("%s", &colunas[j].valor);
+				
+
+
+		// 		if (j == numeroDeColunas-1)
+		// 		{
+		// 			if (i == resposta-1)
+		// 			{
+						
+		// 			}else{
+		// 				strcat(colunas[j].valor, "#");
+		// 			}
+		// 		}
+		// 		else{
+		// 			strcat(colunas[j].valor, ",");
+		// 		}
+		// 		fprintf(arquivo, "%s", colunas[j].valor);
+		// 		setbuf(stdin, NULL);
+		// }
+	}
+	else
+	{
+		printf("PrimaryKey manual\n");
+	}
 	
 	
 }
