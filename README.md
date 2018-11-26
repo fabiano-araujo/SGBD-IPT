@@ -14,6 +14,6 @@
 5. Pesquisar valor em uma tabela
 
 6. Apagar valor de uma tabela
-
+```
 7. Apagar uma tabela
-  
+```
