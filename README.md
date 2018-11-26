@@ -9,7 +9,7 @@
 3. Criar uma nova linha na tabela
 ```
 ```
-4. Listar todos os dados de uma tabela(Bug no último elemento)
+4. Listar todos os dados de uma tabela(Bug Fixed)
 ```
 5. Pesquisar valor em uma tabela
 
