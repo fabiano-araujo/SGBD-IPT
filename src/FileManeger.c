@@ -754,16 +754,37 @@ int apagarValor(char* tabela)
 }
 int apagarTabela(char* tabela)
 {
+	char pasta[30] = "Tabelas/";
+	strcat(pasta, tabela);
+	strcat(pasta, ".txt");
+	int resultado;
 
+	FILE* arq = fopen(pasta, "r");
+	if (!arq)
+	{
+		printf("Tabela inexistente\n");
+		fclose(arq);
+		return 1;
+	}
+	else
+	{
+		fclose(arq);
+		resultado = remove(pasta);
+		if (resultado == 0)
+		{
+			printf("Deletado com sucesso\n");
+		}
+		else
+		{
+			printf("Erro ao deletar\n");
+		}
+	}
+
+	// FILE* arquivo = fopen(pasta, "a+");
+
+	// if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	// else printf("Tudo OK ao abrir arquivo\n");
 }
-
-
-
-
-
-
-
-
 
 
 
