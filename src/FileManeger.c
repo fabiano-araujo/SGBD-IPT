@@ -3,6 +3,7 @@
 #include <string.h>
 #include "FileManeger.h"
 #include <ctype.h>
+#include "database.h"
 
 
 int criarTabela(char* tabela)
@@ -758,6 +759,7 @@ int apagarTabela(char* tabela)
 	strcat(pasta, tabela);
 	strcat(pasta, ".txt");
 	int resultado;
+	char *pch;
 
 	FILE* arq = fopen(pasta, "r");
 	if (!arq)
@@ -784,6 +786,66 @@ int apagarTabela(char* tabela)
 
 	// if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
 	// else printf("Tudo OK ao abrir arquivo\n");
+
+
+
+	FILE* tabelas = fopen("Tabelas/tabs.txt", "a+");
+	if (tabelas == NULL)printf("Erro ao abrir arquivo\n");
+	else printf("Tudo OK\n");
+	
+
+	int contador = 1;
+	Valores* nomesDasTabelas = (Valores*) malloc(contador*sizeof(Valores));
+
+	char nomeTabela[30];
+	
+	while(fgets(nomeTabela, sizeof(nomeTabela), tabelas) != NULL)
+	{
+		
+		strcpy(nomesDasTabelas[contador-1].valor, nomeTabela);
+		printf("%s", nomesDasTabelas[contador-1].valor);
+		contador++;
+		nomesDasTabelas = (Valores*) realloc(nomesDasTabelas, (contador+1)*sizeof(Valores));
+	}
+
+	fclose(tabelas);
+
+	FILE* tabelasP = fopen("provisorio.txt", "a+");
+	for (int i = 0; i < contador-1; i++)
+	{
+		pch = strtok(nomesDasTabelas[i].valor, "\n");
+		if (strcmp(pch, tabela)==0)
+		{
+			printf("%s == %s\n", nomesDasTabelas[i].valor, tabela);
+		}
+		else
+		{
+			fprintf(tabelasP, "%s\n", pch);
+		}
+	}
+	resultado = remove("Tabelas/tabs.txt");
+	if (resultado == 0)
+	{
+		printf("Deletado com sucesso\n");
+	}
+	else
+	{
+		printf("Erro ao deletar\n");
+	}
+
+	free(nomesDasTabelas);
+	fclose(tabelasP);
+	system("ren provisorio.txt tabs.txt");
+	system("move /Y tabs.txt Tabelas/");
+
+
+
+
+
+
+
+	
+	
 }
 
 
