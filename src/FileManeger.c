@@ -599,6 +599,7 @@ int criarLinha(char* tabela)
 		{
 			//printf("%12d %d", i, j);
 			printf("%12s", valor[i][j].valor);
+			setbuf(stdin, NULL);
 		}
 		printf("\n");
 	}
@@ -624,6 +625,7 @@ int criarLinha(char* tabela)
 
 	fseek(arquivo, 0, SEEK_END);
 	int nPK;
+	int bloquear = 0;
 	char valorP[10];
 	fprintf(arquivo, "#");
 	if(strcmp(colunas[0].nome, "PrimaryKey") == 0)
@@ -641,49 +643,108 @@ int criarLinha(char* tabela)
 					printf("é igual\n");
 					break;
 				}
-
+				else if(j+1 == quantidadeLinhas)
+				{
+					printf("%d\n", i);
+					itoa(i, valorP, 10);
+					strcat(valorP, ",");
+					fprintf(arquivo, "%s", valorP);
+					printf("%s\n", valorP);
+					bloquear = 1;
+					break;
+				}
 			}
-			if (i+1 == quantidadeLinhas)
+			if(bloquear == 1)
+			{
+				printf("break!!!\n");
+				break;
+			}
+			if (i+1 == quantidadeLinhas && bloquear == 0)
 			{
 				itoa(i+1, valorP, 10);
 				strcat(valorP, ",");
 				fprintf(arquivo, "%s", valorP);
+				printf("%s\n", valorP);
 			}
 		}
 
+		for (j = 1; j < numeroDeColunas-48; j++)
+			{
 
-
-		fclose(arquivo);
-
-		// for (j = 0; j < numeroDeColunas-48; j++)
-		// 	{
-
-		// 		//Verificar se o valor Digitado é do valor escolhido para a coluna
-		// 		printf("%d = %s: ", j, colunas[j].nome);
-		// 		scanf("%s", &colunas[j].valor);
+				//Verificar se o valor Digitado é do valor escolhido para a coluna
+				printf("%d = %s: ", j, colunas[j].nome);
+				scanf("%s", &colunas[j].valor);
 				
 
 
-		// 		if (j == numeroDeColunas-1)
-		// 		{
-		// 			if (i == resposta-1)
-		// 			{
+				if (j == numeroDeColunas-49)
+				{
+					// if (i == resposta-1)
+					// {
 						
-		// 			}else{
-		// 				strcat(colunas[j].valor, "#");
-		// 			}
-		// 		}
-		// 		else{
-		// 			strcat(colunas[j].valor, ",");
-		// 		}
-		// 		fprintf(arquivo, "%s", colunas[j].valor);
-		// 		setbuf(stdin, NULL);
-		// }
+					// }else{
+					// 	strcat(colunas[j].valor, "#");
+					// }
+				}
+				else
+				{
+					strcat(colunas[j].valor, ",");
+				}
+				fprintf(arquivo, "%s", colunas[j].valor);
+				printf("%s\n", colunas[j].valor);
+				setbuf(stdin, NULL);
+		}
 	}
-	else
-	{
+	else{
+		bloquear = 0;
 		printf("PrimaryKey manual\n");
+		for (j = 0; j < numeroDeColunas-48; j++)
+			{
+				printf("%d = %s: ", j, colunas[j].nome);
+				scanf("%s", &colunas[j].valor);
+				while(bloquear == 0)
+				{
+					for (i = 0; i < quantidadeLinhas; i++)
+					{
+						if (strcmp(valor[i][0].valor, &colunas[j].valor) == 0)
+						{
+							printf("Ja existe!\n");
+							printf("Digitar outro valor: \n");
+							printf("%d = %s: ", j, colunas[j].nome);
+							scanf("%s", &colunas[j].valor);
+							bloquear = 0;
+							break;
+						}
+						else
+						{
+							bloquear = 1;
+						}
+					}
+				}
+				//Verificar se o valor Digitado é do valor escolhido para a coluna
+				// printf("%d = %s: ", j, colunas[j].nome);
+				// scanf("%s", &colunas[j].valor);
+				
+
+
+				if (j == numeroDeColunas-49)
+				{
+					// if (i == resposta-1)
+					// {
+						
+					// }else{
+					// 	strcat(colunas[j].valor, "#");
+					// }
+				}
+				else{
+					strcat(colunas[j].valor, ",");
+				}
+				fprintf(arquivo, "%s", colunas[j].valor);
+				printf("%s\n", colunas[j].valor);
+				setbuf(stdin, NULL);
+		}
 	}
+	fclose(arquivo);
 	
 	
 }

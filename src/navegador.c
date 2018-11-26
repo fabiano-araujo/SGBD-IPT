@@ -44,7 +44,12 @@ int main(){
 				break;
 
 			case 4:
-				listarTodosDados();
+				nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				listarTodosDados(nome);
 				break;
 
 			case 5:
