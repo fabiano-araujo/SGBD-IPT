@@ -149,7 +149,7 @@ int listarTodosDados(char* tabela)
 			{
 				contador = 0;
 				pch = strtok(dado, ",");
-				strcpy(valor[posicaoC][posicaoL].valor, dado);
+				strcpy(valor[posicaoC][posicaoL].valor, pch);
 				contador = 0;
 				printf("-%s\n", valor[posicaoC][posicaoL].valor);
 				posicaoL++;
@@ -158,7 +158,7 @@ int listarTodosDados(char* tabela)
 			{
 				contador = 0;
 				pch = strtok(dado, "#");
-				strcpy(valor[posicaoC][posicaoL].valor, dado);
+				strcpy(valor[posicaoC][posicaoL].valor, pch);
 				contador = 0;
 				printf("-%s\n", valor[posicaoC][posicaoL].valor);
 				posicaoL=0;
@@ -309,9 +309,16 @@ int listarTodosDados(char* tabela)
 		}
 	}
 
-	contador = 0;
-	pch = strtok(dado, "i");
+	int len;
+	int tamanho;
+	char str[20]; 
 	strcpy(valor[posicaoC][posicaoL].valor, dado);
+	//contador = 0;
+	printf("%d\n", contador);
+	pch = strtok(dado, "i");
+	len = strxfrm(str, pch, 2);
+	printf("%s\n", str);
+	strcpy(valor[posicaoC][posicaoL].valor, str);
 	contador = 0;
 	printf("-%s\n", valor[posicaoC][posicaoL].valor);
 
@@ -327,6 +334,7 @@ int listarTodosDados(char* tabela)
 		}
 		printf("\n");
 	}
+	printf("%s\n", valor[3][2].valor);
 }
 int pesquisarValor()
 {
