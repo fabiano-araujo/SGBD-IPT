@@ -330,9 +330,13 @@ int listarTodosDados(char* tabela)
 	printf("Tamanho: %d. len: %d\n", tamanho, len);
 	printf("-%s\n", valor[posicaoC][posicaoL].valor);
 
+	printf("-> L: %d. C: %d\n", quantidadeLinhas, numeroDeColunas-48);
 	
 	int j;
-	printf("-> L: %d. C: %d\n", quantidadeLinhas, numeroDeColunas-48);
+	for (i = 0; i < numeroDeColunas-48; i++)
+	{
+		printf("%12s", colunas[i].nome);
+	}
 	for (i = 0; i < quantidadeLinhas; i++)
 	{
 		for (j = 0; j < numeroDeColunas-48; j++)
