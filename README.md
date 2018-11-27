@@ -1,4 +1,4 @@
-# SGBD-ITP v5.0
+# SGBD-ITP v0.5
 ```
 1. Criar um tabela
 ```
