@@ -130,7 +130,9 @@ int listarTodosDados(char* tabela)
 
     //          COM FGETC
     
-	while((c = fgetc(arquivo)) != EOF){
+	while((c = fgetc(arquivo)) != EOF)
+	{
+
 		//printf("%c", c);
 		// if(c == "\0")
 		// {
@@ -309,17 +311,23 @@ int listarTodosDados(char* tabela)
 		}
 	}
 
+	//setbuf(stdin, NULL);
+
 	int len;
 	int tamanho;
-	char str[20]; 
-	strcpy(valor[posicaoC][posicaoL].valor, dado);
+	char str[15];
+	strcpy(str, dado);
 	//contador = 0;
+	printf("dado: %s\n", dado);
 	printf("%d\n", contador);
-	pch = strtok(dado, "i");
-	len = strxfrm(str, pch, 2);
-	printf("%s\n", str);
-	strcpy(valor[posicaoC][posicaoL].valor, str);
-	contador = 0;
+	//pch = strtok(str, "p");
+	len = strxfrm(pch, str, contador);
+	//strcpy(valor[posicaoC][posicaoL].valor, ptr);
+	//printf("%s\n", ptr);
+		//contador = 0;
+	strcpy(valor[posicaoC][posicaoL].valor, pch);
+	
+	printf("Tamanho: %d. len: %d\n", tamanho, len);
 	printf("-%s\n", valor[posicaoC][posicaoL].valor);
 
 	
@@ -335,6 +343,7 @@ int listarTodosDados(char* tabela)
 		printf("\n");
 	}
 	printf("%s\n", valor[3][2].valor);
+	setbuf(stdin, NULL);
 }
 int pesquisarValor()
 {

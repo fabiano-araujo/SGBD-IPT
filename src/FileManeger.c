@@ -751,6 +751,347 @@ int criarLinha(char* tabela)
 }
 int apagarValor(char* tabela)
 {
+	char pasta[30] = "Tabelas/";
+	char tabelaPro[20];
+	strcat(pasta, tabela);
+	strcat(pasta, ".txt");
+
+	FILE* arq = fopen(pasta, "r");
+	if (!arq)
+	{
+		printf("Tabela inexistente\n");
+		fclose(arq);
+		return 1;
+	}
+	else
+	{
+		fclose(arq);
+	}
+
+	FILE* arquivo = fopen(pasta, "a+");
+
+	if(arquivo == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+
+	int contador = 0;
+	int comecar = 0;
+	int i, j;
+	int encontrada = 0;
+	int criarMalloc = 0;
+	int numeroDeColunas = 0;
+	int inicionomeColunas = 0;
+	int nomeColunas = 0;
+	int quantidadeColunas = 0;
+	int tipoColuna = 0;
+	int tipoDaColuna = 0;
+	int valores = 0;
+	int mallocColunasDados = 0;
+	int mallocDados = 0;
+	int dados = 0;
+	int posicaoL = 0;
+	int posicaoC = 0;
+	int vaiProsDados = 0;
+	int contMatriz = 1;
+	int quantidadeLinhas = 1;
+	int saida;
+	char dado[20];
+	char nomeTabela[42];
+	char nomesColunas[40];
+	char *pch;
+	char c;
+	int coluna = 0;
+	colunaNomeTipo* colunas;
+
+
+	//          COM FSCANF
+	//fscanf(arquivo, "@%s:", &nomeTabela);
+	//printf("%s\n", nomeTabela);
+
+    //          COM FGETC
+    
+	while((c = fgetc(arquivo)) != EOF){
+		//printf("%c", c);
+		// if(c == "\0")
+		// {
+		// 	contador = 0;
+		// 	pch = strtok(dado, "i");
+		// 	strcpy(valor[posicaoC][posicaoL].valor, dado);
+		// 	contador = 0;
+		// 	dados = 0;
+		// 	printf("-%s\n", valor[posicaoC][posicaoL].valor);
+		// }
+		if (dados == 1)
+		{
+			dado[contador]=c;
+			contador++;
+			if(c == ',')
+			{
+				contador = 0;
+				pch = strtok(dado, ",");
+				strcpy(valor[posicaoC][posicaoL].valor, pch);
+				contador = 0;
+				printf("-%s\n", valor[posicaoC][posicaoL].valor);
+				posicaoL++;
+			}
+			else if(c == '#')
+			{
+				contador = 0;
+				pch = strtok(dado, "#");
+				strcpy(valor[posicaoC][posicaoL].valor, pch);
+				contador = 0;
+				printf("-%s\n", valor[posicaoC][posicaoL].valor);
+				posicaoL=0;
+				quantidadeLinhas++;
+
+				contMatriz++;
+				valor = (variaveis**) realloc(valor,contMatriz*sizeof(variaveis*));
+				valor[contMatriz-1] = (variaveis*)malloc(numeroDeColunas*sizeof(variaveis));
+				posicaoC++;
+
+			}
+			
+		}
+		if (vaiProsDados == 1 && c == '(')
+		{
+			//printf("%d %c\n", vaiProsDados, c);
+			mallocColunasDados = 1;
+		}
+		if (mallocColunasDados == 1)
+		{
+			valor = (variaveis**) malloc(contMatriz*sizeof(variaveis*));
+			mallocDados = 1;
+			mallocColunasDados = 0;
+		}
+		if (mallocDados == 1)
+		{
+			valor[0] = (variaveis*)malloc(numeroDeColunas*sizeof(variaveis));
+			mallocDados = 0;
+			dados = 1;
+		}
+
+
+		if (tipoDaColuna == 1)
+		{
+			colunas[coluna].tipo = (int)c;
+			printf("%c, coluna = %d\n", colunas[coluna].tipo, coluna);
+			coluna++;
+			tipoDaColuna = 0;
+			//printf("coluna = %d, numeroDeColunas == %d\n", coluna+1, numeroDeColunas-48);
+			if (coluna == numeroDeColunas-48)
+			{
+				encontrada = 0;
+				vaiProsDados = 1;
+				//printf("encontrada = %d\n", encontrada);
+			}
+			//printf("%d, numeroDeColunas: %d\n", nomeColunas, numeroDeColunas-48);
+		}
+		//if(tipoColuna == 1 && encontrada == 1)
+		//{
+		//	tipoDaColuna = 1;
+		//	tipoColuna = 0;
+		//}
+		
+
+		if (nomeColunas == 1 && encontrada == 1)
+		{
+			nomesColunas[contador] = c;
+			contador++;
+			//printf("c: %c. nomesColunas: %s. contador: %d ", c, nomesColunas, contador);
+			//printf("passou3\n");
+			if(c == '!')
+			{
+				contador = 0;
+				//printf("Passou4\n");
+				pch = strtok(nomesColunas, "!");
+				//printf("pch %s nomesColunas %s\n", pch, nomesColunas);
+				strcpy(colunas[coluna].nome,pch);
+				printf("%s\n", colunas[coluna].nome);
+				nomeColunas = 0;
+				tipoDaColuna = 1;
+				//printf("Passou5\n");
+			}
+		}
+
+		if (inicionomeColunas == 1 && c == ':' && encontrada == 1)
+		{
+			nomeColunas = 1;
+			inicionomeColunas = 0;
+			//printf("passou2\n");
+		}
+		if (c == '-' && encontrada == 1)
+		{
+			nomeColunas = 1;
+		}
+		
+		if (quantidadeColunas == 1)
+		{
+			printf("%c\n", c);
+			numeroDeColunas = (int)c;
+			quantidadeColunas = 0;
+			if (criarMalloc != 2)
+			{
+				criarMalloc = 1;
+			}
+			inicionomeColunas = 1;
+			//printf("Passou1\n");
+		}
+		if (criarMalloc == 1)
+		{
+			colunas = (colunaNomeTipo*) malloc(numeroDeColunas*sizeof(colunaNomeTipo));
+			if (colunas == NULL)
+			{
+				printf("malloc colunas BAD\n");
+			}
+			else{
+				printf("malloc colunas ok\n");
+			}
+			criarMalloc = 2;
+		}
+		//if (nomeColunas == 1)
+		//{
+		//	
+		//}
+		if (comecar == 1)
+		{
+			//printf("%c", c);
+			//printf("Passou no while\n");
+			nomeTabela[contador] = c;
+			contador++;
+			if (c == ':')
+			{
+				comecar = 0;
+				contador = 0;
+				pch = strtok(nomeTabela, ":");
+				//printf("%s == %s, %s\n", tabela, pch, nomeTabela);
+
+				printf("Pronto\n");
+				quantidadeColunas = 1;
+				encontrada = 1;
+					//printf("%s\n", nomeTabela);
+					//strcpy(nomeTabela, vetorVazio);
+					//memset(nomeTabela,'', 42);
+					//printf("%s\n", nomeTabela);
+
+					//setbuf(stdout, NULL);
+					//fflush(stdout);
+			}
+		}
+		if (c == '@')
+		{
+			comecar = 1;
+			printf("1\n");
+		}
+		if (c == ';' && encontrada == 1)
+		{
+			//printf("2\n");
+			break;
+		}
+	}
+
+	int len;
+	int tamanho;
+	char str[15];
+	strcpy(str, dado);
+	//contador = 0;
+	printf("dado: %s\n", dado);
+	printf("%d\n", contador);
+	//pch = strtok(str, "p");
+	len = strxfrm(pch, str, contador);
+	//strcpy(valor[posicaoC][posicaoL].valor, ptr);
+	//printf("%s\n", ptr);
+		//contador = 0;
+	strcpy(valor[posicaoC][posicaoL].valor, pch);
+	
+	printf("Tamanho: %d. len: %d\n", tamanho, len);
+	printf("-%s\n", valor[posicaoC][posicaoL].valor);
+
+	char pk[10];
+	int ignorar;
+	
+	fclose(arquivo);
+	saida = 0;
+	while(saida != 1){
+		printf("Numero da chave primaria que deseja excluir: ");
+		scanf("%s", &pk);
+		for (i = 0; i < quantidadeLinhas; i++)
+		{
+			printf("%s == %s\n", valor[i][0].valor, pk);
+			if (strcmp(valor[i][0].valor, pk)==0)
+			{
+				ignorar = i;
+				printf("Encontrada %d\n", ignorar);
+				saida = 1;
+				break;
+			}
+		}
+		if (saida != 1)
+		{
+			printf("Chave primaria não encontrada\n");
+		}
+	}
+
+	strcpy(tabelaPro, tabela);
+	strcat(tabelaPro, ".txt");
+	FILE* arquivoPro = fopen(tabelaPro, "a+");
+
+	if(arquivoPro == NULL)printf("Erro ao Abrir Arquivo\n");
+	else printf("Tudo OK ao abrir arquivo\n");
+
+	fprintf(arquivoPro, "@%s:%d:", tabela, numeroDeColunas-48);
+	
+
+	for (i = 0; i < numeroDeColunas-48; i++)
+	{
+		fprintf(arquivoPro, "%s!%d-", colunas[i].nome, colunas[i].tipo-48);
+	}
+
+	fprintf(arquivoPro, "(");
+	for (i = 0; i < quantidadeLinhas; i++)
+	{
+		for (j = 0; j < numeroDeColunas-48; j++)
+		{
+			if (strcmp(valor[i][0].valor, pk)==0)
+			{
+				break;
+			}
+			fprintf(arquivoPro, "%s", valor[i][j].valor);
+			if (j == numeroDeColunas-49)
+			{
+				if (i == quantidadeLinhas-1)
+				{
+						
+				}
+				else
+				{
+					fprintf(arquivoPro, "#");
+				}
+			}
+			else
+			{
+				fprintf(arquivoPro, ",");
+			}
+				//fprintf(arquivo, "%s", colunas[j].valor);
+			setbuf(stdin, NULL);
+		}
+	}
+	int resultado;
+	resultado = remove(pasta);
+	if (resultado == 0)
+	{
+		printf("Deletado com sucesso\n");
+	}
+	else
+	{
+		printf("Erro ao deletar\n");
+	}
+
+	fclose(arquivoPro);
+	char comando[50] = "move /Y ";
+	strcat(comando, tabelaPro);
+	strcat(comando, " Tabelas/");
+	//system("ren provisorio.txt tabs.txt");
+	system(comando);
+
 
 }
 int apagarTabela(char* tabela)
@@ -837,14 +1178,6 @@ int apagarTabela(char* tabela)
 	fclose(tabelasP);
 	system("ren provisorio.txt tabs.txt");
 	system("move /Y tabs.txt Tabelas/");
-
-
-
-
-
-
-
-	
 	
 }
 
