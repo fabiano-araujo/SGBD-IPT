@@ -1,1 +1,1 @@
-@alexandre:4:PrimaryKey!2-Nome!5-idade!2-altura!3-(0,Alexandre,20,1.73#1,asd,12,12.4#2,asfdd,43,432.4#3,aline,15,1.70#4,gdf,43,2.10
+@alexandre:4:PrimaryKey!2-Nome!5-idade!2-altura!3-(0,Alexandre,20,1.73#1,asd,12,12.4#3,aline,15,1.70#4,gdf,43,2.10
