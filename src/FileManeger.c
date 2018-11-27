@@ -344,9 +344,6 @@ int criarTabela(char* tabela)
 
 
 
-//======================================CRIAR LINHA=====================================//
-
-
 int criarLinha(char* tabela)
 {
 

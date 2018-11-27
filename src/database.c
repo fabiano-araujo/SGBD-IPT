@@ -345,6 +345,7 @@ int listarTodosDados(char* tabela)
 	printf("%s\n", valor[3][2].valor);
 	setbuf(stdin, NULL);
 }
+
 int pesquisarValor()
 {
 	int tipo;
