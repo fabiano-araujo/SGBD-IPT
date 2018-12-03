@@ -5,8 +5,10 @@
 int main(){
 
 	int opcao;
-	char nome[40];
+	char nome[40];	
+	
 	do{
+		printf("%s\n","Digite 0 para sair:");	
 		printf("%s\n","Digite 1 para criar uma tabela:");
 		printf("%s\n","Digite 2 para listar todas as tabelas:");
 		printf("%s\n","Digite 3 para criar uma nova linha na tabela:");	
@@ -53,7 +55,7 @@ int main(){
 				break;
 
 			case 5:
-				pesquisarValor();
+				pesquisarValor();				
 				break;
 
 			case 6:
@@ -74,10 +76,10 @@ int main(){
 				apagarTabela(nome);
 				break;
 
-			default:
-				setbuf(stdin, NULL);
+			default:				
 				printf("Valor Invalido\n");
 		}	
+		setbuf(stdin, NULL);
 	}while(opcao != 0);
 	return 0;
 }

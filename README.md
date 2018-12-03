@@ -1,4 +1,4 @@
-# SGBD-ITP v0.7
+# SGBD-ITP v1.0
 ```
 1. Criar um tabela
 ```
@@ -9,9 +9,11 @@
 3. Criar uma nova linha na tabela
 ```
 ```
-4. Listar todos os dados de uma tabela(Bug no último elemento)
+4. Listar todos os dados de uma tabela
 ```
-5. Pesquisar valor em uma tabela
+```
+5. Pesquisar valor em uma tabela(Só para valores to tipo INT)
+```
 ```
 6. Apagar valor de uma tabela
 ```
