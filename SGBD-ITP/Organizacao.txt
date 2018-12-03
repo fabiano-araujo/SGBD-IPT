@@ -1,0 +1,15 @@
+1 char
+2 int
+3 float
+4 double
+5 string
+
+@NomeTabela:quantidade de colunas:coluna1!4-coluna2!1-coluna3!0-(dado1,dado2,dado3.dado1,dado2,dado3
+
+@ inicio de uma tabela
+: finalização do nome da tabela, logo em seguida ficará a quantidade de colunas
+! finalização do nome da coluna, logo em seguida ficará seu tipo
+- separação entre os nomes das colunas
+( indicará o incio do conteudo da tabela
+# separação das linhas
+, separação de cada elemento da linha
