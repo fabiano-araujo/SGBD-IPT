@@ -1,13 +1,25 @@
 #include <stdio.h>
-int create(char* name, char* txt){
 
-}
-int read(char* name){
+typedef struct{
+	char nome[40];
+	int tipo;
+	char valor[200];
+}colunaNomeTipo;
 
-}
-int update(char* name, char* txt){
+typedef struct{
+	char valor[200];
+}valoresPrimarios;
 
-}
-int delete(char* name){
+typedef struct{
+	char valor[40];
+}valores;
 
-}
+valores **valor;
+
+int criarTabela(char* tabela);
+
+int criarLinha(char* tabela);
+
+int apagarValor(char* tabela);
+
+int apagarTabela(char* tabela);

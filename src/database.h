@@ -1,13 +1,7 @@
 #include <stdio.h>
-int create(){
 
-}
-int read(){
+int listarTabelas();
 
-}
-int update(){
+int listarTodosDados();
 
-}
-int delete(){
-
-}
+int pesquisarValor();

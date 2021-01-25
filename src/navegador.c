@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "database.h"
+#include "FileManeger.h"
 
 int main(){
 
 	int opcao;
-	
+	char nome[40];
 	do{
 		printf("%s\n","Digite 1 para criar uma tabela:");
 		printf("%s\n","Digite 2 para listar todas as tabelas:");
@@ -21,7 +22,12 @@ int main(){
 			case 0:
 				break;
 			case 1:
-				criarTabela();
+				nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				criarTabela(nome);
 				break;
 
 			case 2:
@@ -29,7 +35,12 @@ int main(){
 				break;
 
 			case 3:
-				criarLinha();
+				nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				criarLinha(nome);
 				break;
 
 			case 4:
@@ -41,14 +52,25 @@ int main(){
 				break;
 
 			case 6:
-				apagarValor();
+				nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				apagarValor(nome);
 				break;
 
 			case 7:
-				apagarTabela();
+				nome[40];
+
+				printf("Nome da tabela: ");
+				scanf("%s", &nome);
+
+				apagarTabela(nome);
 				break;
 
 			default:
+				setbuf(stdin, NULL);
 				printf("Valor Invalido\n");
 		}	
 	}while(opcao != 0);
